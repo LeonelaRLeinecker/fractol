@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 19:27:57 by leo               #+#    #+#             */
-/*   Updated: 2026/01/28 20:06:46 by leo              ###   ########.fr       */
+/*   Updated: 2026/01/29 16:37:16 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+# define ZOOM_IN 4
+# define ZOOM_OUT 5
 
 # define MANDELBROT 1
 # define JULIA 2

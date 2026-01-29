@@ -6,16 +6,18 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 10:02:03 by leo               #+#    #+#             */
-/*   Updated: 2026/01/29 10:07:15 by leo              ###   ########.fr       */
+/*   Updated: 2026/01/29 16:38:24 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    put_pixel(t_fractol *f, int x, int y, int color)
+int mouse_hook(int button, int x, int y, t_fractol *f)
 {
-    char    *dst;
-
-    dst = f->addr + (y * f->line_len + x * (f->bpp / 8));
-    *(unsigned int *)dst = color;
+    if (button == ZOOM_IN)
+        zoom(f, 0.8);
+    if (button == ZOOM_OUT)
+        zoom(f, 1.2);
+    render(f);
+    return (0);
 }
