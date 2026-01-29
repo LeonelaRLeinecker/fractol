@@ -6,11 +6,19 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 09:46:36 by leo               #+#    #+#             */
-/*   Updated: 2026/01/29 09:55:11 by leo              ###   ########.fr       */
+/*   Updated: 2026/01/29 19:33:25 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void    put_pixel(t_fractol *f, int x, int y, int color)
+{
+    char    *dst;
+
+    dst = f->addr + (y * f->line_len + x * (f->bpp / 8));
+    *(unsigned int *)dst = color;
+}
 
 void    render(t_fractol *f)
 {
@@ -36,3 +44,4 @@ void    render(t_fractol *f)
     }
     
 }
+
