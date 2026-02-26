@@ -1,39 +1,36 @@
-NAME : fractol
+NAME = fractol
 INCLUDE = fractol.h
 AR = ar rcs
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLX_D = ./minilibx-linux/	
+MLX_D = ./minilibx-linux
+MLX = $(MLX_D)/libmlx.a
 RM = rm -rf
 
+SRCS = main.c \
+       init.c \
+       render.c \
+       complex.c \
+       events.c \
+       color.c
 
-SCRCS =  main.c \
-		 init.c \
-		 render.c \
-		 complex.c \
-		 events.c \
-		 color.c \
-
-OBJS = $(SCRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-run:
-	@$(CC) $(FLAGS) -g $(SCRCS) $(FRACTOL_H) $(MLX) -Iinclude -lglfw -lm -o $(NAME)
-
 %.o: %.c $(INCLUDE)
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_D) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) -lm -o $(NAME)
 
 clean:
-	@$(RM) $(OBJS)
+	$(RM) $(OBJS)
 
-fclean : clean
-	@$(RM) $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re
 
