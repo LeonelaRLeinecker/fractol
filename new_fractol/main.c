@@ -5,25 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleineck <lleineck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 20:10:12 by lleineck          #+#    #+#             */
-/*   Updated: 2026/02/26 20:27:59 by lleineck         ###   ########.fr       */
+/*   Created: 2026/02/27 17:44:06 by lleineck          #+#    #+#             */
+/*   Updated: 2026/02/27 20:11:01 by lleineck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "mlx.h"
+#include "MLX42/MLX42.h"
+#include <stdlib.h>
+
+#define WIDTH 800
+#define HEIGHT 600
 
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
+	mlx_t	*mlx;
+	mlx_image_t	*img;
+	int		x;
+	int		y;
+	int		color;
+	int		index;
 
-	mlx = mlx_init();
+	x = 0;
+	y = 0;
+	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!mlx)
-		return (1);
-	win = mlx_new_window(mlx, 800, 600, "fractol");
-	if (!win)
-		return (1);
+		return (EXIT_FAILURE);
+	if (!img)
+		return (EXIT_FAILURE);
+	color = 0xFF0000FF;
+	while (y < HEIGHT)
+	{
+		while (x < WIDTH)
+		{
+			index = (y * WIDTH + 4) * 4;
+			img->pixels[index + 0] = (color >> 24) & 0xFF;
+			img->pixels[index + 1] = (color >> 16) & 0xFF;
+			img->pixels[index + 2] = (color >> 8) & 0xFF;
+			img->pixels[index + 3] = color & 0xFF;
+			mlx_put_pixel(img, x, y, color);
+			x++;
+		}
+		
+		y++;
+	}
+	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop(mlx);
-	return (0);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
 }
+

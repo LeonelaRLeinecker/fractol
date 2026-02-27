@@ -1,55 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   drow.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleineck <lleineck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 20:28:59 by lleineck          #+#    #+#             */
-/*   Updated: 2026/02/26 20:40:23 by lleineck         ###   ########.fr       */
+/*   Created: 2026/02/27 19:22:42 by lleineck          #+#    #+#             */
+/*   Updated: 2026/02/27 19:28:53 by lleineck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "MLX42/MLX42.h"
+#include <stdlib.h>
 
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <math.h>
-# include "libft.h"
+mlx_image_t	*img;
 
-typedef struct s_complex
-{
-	double	re;
-	double	im;
-}	t_complex;
-
-typedef struct s_fractol
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		heigth;
-}	t_fractol;
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif
-
-
+mlx_image_t = mlx_new_image(WHIDT, HEIGHT);
