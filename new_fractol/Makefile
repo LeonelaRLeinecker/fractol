@@ -3,22 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleineck <lleineck@student.42.fr>          +#+  +:+       +#+         #
+#    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/27 17:24:05 by lleineck          #+#    #+#              #
-#    Updated: 2026/02/27 19:17:29 by lleineck         ###   ########.fr        #
+#    Updated: 2026/02/28 19:47:19 by leo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= fractol
 NAME = fractol
+INCLUDE = fractol.h
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iinclude -Ilibft -I"v2.4.2 source code/codam-coding-college-MLX42-2e33759/include"
-LDFLAGS = -Llibft -lft -L"v2.4.2 source code/codam-coding-college-MLX42-2e33759/build" -lmlx42 -ldl -lglfw -pthread -lm
-SRC = main.c
+CFLAGS = -Wall -Werror -Wextra 
+MLXFLAGS = MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+SRC = main.c \
+	  utils.c \
+	  mandelbrot.c \
+	  hooks.c \
+	  config.c \
+	  render.c
 OBJ = $(SRC:.c=.o)
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
+
 
 all: $(LIBFT) $(NAME)
 
@@ -26,10 +32,10 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) all
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c $(INCLUDE)
+	$(CC) $(CFLAGS) $(MLXFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
@@ -41,7 +47,5 @@ fclean: clean
 
 re: fclean all
 
-
 .PHONY: all clean fclean re
-
 
