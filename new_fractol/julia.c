@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 15:50:44 by lleineck          #+#    #+#             */
-/*   Updated: 2026/03/01 19:11:54 by leo              ###   ########.fr       */
+/*   Created: 2026/02/28 18:39:01 by leo               #+#    #+#             */
+/*   Updated: 2026/03/01 16:58:33 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "fractol.h"
+
+int	julia(t_complex z, t_complex c)
 {
-	if (c >= 48 && c <= 57)
+	int i;
+
+	i = 0;
+	while (i < MAX_ITER && get_module(z) < 4)
 	{
-		return (1);
+		z = add_complex(pow_complex(z), c);
+		i++;
 	}
-	else
-		return (0);
+	return (i);
 }
+

@@ -3,13 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleineck <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:08:13 by lleineck          #+#    #+#              #
-#    Updated: 2025/05/07 20:18:52 by lleineck         ###   ########.fr        #
+#    Updated: 2026/03/01 17:59:31 by leo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-#defino 
+
 #variables 
 NAME = libft.a
 CC = cc
@@ -49,7 +49,8 @@ ft_striteri.c \
 ft_putchar_fd.c \
 ft_putstr_fd.c \
 ft_putendl_fd.c \
-ft_putnbr_fd.c
+ft_putnbr_fd.c \
+ft_strcmp.c
 
 #recursos/funciones del bounus:
 BONUS = ft_lstnew_bonus.c \
@@ -102,6 +103,6 @@ fclean: clean
 re: fclean all
 
 #defino llamadas del make
-.PHONY: all bonus clean fclean re
+.PHONY: bonus clean fclean re
 
 

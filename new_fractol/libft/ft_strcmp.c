@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drow.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleineck <lleineck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 19:22:42 by lleineck          #+#    #+#             */
-/*   Updated: 2026/02/27 19:28:53 by lleineck         ###   ########.fr       */
+/*   Created: 2026/03/01 17:47:45 by leo               #+#    #+#             */
+/*   Updated: 2026/03/01 18:25:26 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
-#include <stdlib.h>
+# include "libft.h"
 
-mlx_image_t	*img;
-
-mlx_image_t = mlx_new_image(WHIDT, HEIGHT);
+int ft_strcmp(char *s1, char *s2) 
+{
+    while (*s1 && (*s1 == *s2)) 
+    {
+        s1++;
+        s2++;
+    }
+    return *s1 - *s2;
+}

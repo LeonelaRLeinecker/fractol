@@ -6,7 +6,7 @@
 #    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/27 17:24:05 by lleineck          #+#    #+#              #
-#    Updated: 2026/02/28 19:47:19 by leo              ###   ########.fr        #
+#    Updated: 2026/03/01 19:07:30 by leo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRC = main.c \
 	  mandelbrot.c \
 	  hooks.c \
 	  config.c \
-	  render.c
+	  render.c \
+	  julia.c \
+	  parse.c
 OBJ = $(SRC:.c=.o)
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -32,7 +34,7 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) all
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 
 %.o: %.c $(INCLUDE)
 	$(CC) $(CFLAGS) $(MLXFLAGS) -c $< -o $@

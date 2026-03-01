@@ -39,10 +39,13 @@ void keyboard_event(void* param)
 void scroll_event(double xdelta, double ydelta, void* param) {
 	t_config* config = param;
     (void)xdelta;
+    printf("zoom\n");
+    
     if (ydelta < 0) {
         zoom(config, 0.8);
         render(config);
     }
+    
     if (ydelta > 0) {
         zoom(config, 1.2);
         render(config);
