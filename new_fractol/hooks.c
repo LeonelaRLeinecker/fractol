@@ -36,20 +36,47 @@ void keyboard_event(void* param)
         render(config);
 }
 
-void scroll_event(double xdelta, double ydelta, void* param) {
-	t_config* config = param;
-    (void)xdelta;
-    printf("zoom\n");
-    
-    if (ydelta < 0) {
-        zoom(config, 0.8);
-        render(config);
-    }
-    
-    if (ydelta > 0) {
-        zoom(config, 1.2);
-        render(config);
-    }
+void zoom(t_config *config, double zoom_factor, int mouse_x, int mouse_y)
+{
+    t_complex	mouse;
 
-        
+	mouse = pixel_to_complex(mouse_x, mouse_y, config);
+
+	config->x_range.start = mouse.real + (config->x_range.start - mouse.real) *	zoom_factor;
+    config->x_range.end = mouse.real + (config->x_range.end - mouse.real) * zoom_factor;
+	config->y_range.start = mouse.imaginary + (config->y_range.start - mouse.imaginary) * zoom_factor;
+	config->y_range.end = mouse.imaginary + (config->y_range.end - mouse.imaginary) * zoom_factor;
+
+}
+
+void scroll_event(double xdelta, double ydelta, void* param) 
+{
+	t_config* config = param;
+    int mouse_x;
+	int mouse_y;
+    
+	(void)xdelta;
+    mlx_get_mouse_pos(config->mlx, &mouse_x, &mouse_y);
+    if (ydelta < 0) 
+	{
+        zoom(config, 0.8, mouse_x, mouse_y);
+        render(config);
+    }
+    
+    if (ydelta > 0) 
+	{
+        zoom(config, 1.2, mouse_x, mouse_y);
+        render(config);
+    }    
+}
+
+void move(t_config *config, double vertical, double horizontal) {
+    double x_magnitude = config->x_range.end - config->x_range.start;
+    double y_magnitude = config->y_range.end - config->y_range.start;
+
+    config->x_range.start += x_magnitude * horizontal;
+    config->x_range.end += x_magnitude * horizontal;
+
+    config->y_range.start += y_magnitude * vertical;
+    config->y_range.end += y_magnitude * vertical;
 }

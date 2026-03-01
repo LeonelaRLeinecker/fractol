@@ -16,19 +16,16 @@ t_complex   pixel_to_complex(int x, int y, t_config *config)
 	return res;
 }
 
-int get_color(int iter)
-{
-	if (iter == MAX_ITER)
-		return (0x000000FF); // negro
-	return ((iter * 255 / MAX_ITER) << 24) | 0x000000FF;
-}
 
 void	render(t_config *config)
 {
 	int			x;
 	int			y;
 	int			iter;
+	int			is_mandelbrot;
 	t_complex	z;
+
+	is_mandelbrot = ft_strcmp(config->fractal_type, MANDELBROT) == 0;
 
 	y = 0;
 	if (config->img)
@@ -41,12 +38,10 @@ void	render(t_config *config)
 		{
 			z = pixel_to_complex(x, y, config);
 	
-			if(ft_strcmp(config->fractal_type, MANDELBROT) == 0)
+			if(is_mandelbrot)
 				iter = mandelbrot(z);
-			else if(ft_strcmp(config->fractal_type, JULIA) == 0)
-				iter = julia(z, config->julia_center);
 			else
-				print_help();
+				iter = julia(z, config->julia_center);
 
 			mlx_put_pixel(config->img, x, y, get_color(iter));
 			x++;

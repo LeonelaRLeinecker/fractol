@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 17:29:49 by leo               #+#    #+#             */
-/*   Updated: 2026/03/01 19:35:55 by leo              ###   ########.fr       */
+/*   Updated: 2026/03/01 21:37:46 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define MAX_ITER 100
 # define MANDELBROT "mandelbrot"
 # define JULIA "julia"
+# define M_PI 3.14159265358979323846
 
 // Complex
 typedef struct t_complex
@@ -52,16 +53,18 @@ typedef struct t_config {
 	t_range y_range;
 	char *fractal_type;
 	t_complex julia_center;
+	int is_rendering;
 	
 } t_config;
 
-t_config create_config();
+t_config create_config(int argc, char **argv);
 void move(t_config *config, double vertical, double horizontal);
-void zoom(t_config *config, double factor);
+void zoom(t_config *config, double zoom_factor, int mouse_x, int mouse_y);
 void print_help(void);
 
 // Render
 void render(t_config *config);
+t_complex   pixel_to_complex(int x, int y, t_config *config);
 
 // Hooks
 void keyboard_event(void* param);
@@ -69,5 +72,9 @@ void scroll_event(double xdelta, double ydelta, void* param);
 
 // Parse
 double atod(char *s);
+
+// Color
+int get_color(int iter);
+
 
 #endif

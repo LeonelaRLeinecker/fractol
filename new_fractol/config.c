@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 16:32:47 by leo               #+#    #+#             */
-/*   Updated: 2026/03/01 19:44:32 by leo              ###   ########.fr       */
+/*   Updated: 2026/03/01 20:36:33 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 
 void print_help(void) {
-    printf("Invalid arguments. You need to choose fractal type.\n Available options:\n\tmandelbrot\n\tjulia\n");
-    printf("For julia set, also provide the value for c. Real and imaginary parts. Example ./fractol julia -0.70176 -0.50\n");
+    ft_putstr_fd("Invalid arguments. You need to choose fractal type.\n Available options:\n\tmandelbrot\n\tjulia\n", 1);
+    ft_putstr_fd("For julia set, also provide the value for c. Real and imaginary parts. Example ./fractol julia -0.70176 -0.50\n", 1);
     exit(0);
 }
 
@@ -76,33 +76,3 @@ t_config    create_config(int argc, char **argv)
     return config;
 }
 
-void move(t_config *config, double vertical, double horizontal) {
-    double x_magnitude = config->x_range.end - config->x_range.start;
-    double y_magnitude = config->y_range.end - config->y_range.start;
-
-    config->x_range.start += x_magnitude * horizontal;
-    config->x_range.end += x_magnitude * horizontal;
-
-    config->y_range.start += y_magnitude * vertical;
-    config->y_range.end += y_magnitude * vertical;
-}
-
-void zoom(t_config *config, double zoom_factor)
-{
-    double x_center;
-    double y_center;
-    double x_width;
-    double y_height;
-
-    x_center = (config->x_range.start + config->x_range.end) / 2.0;
-    y_center = (config->y_range.start + config->y_range.end) / 2.0;
-
-    x_width = (config->x_range.end - config->x_range.start) * zoom_factor;
-    y_height = (config->y_range.end - config->y_range.start) * zoom_factor;
-
-    config->x_range.start = x_center - x_width / 2.0;
-    config->x_range.end = x_center + x_width / 2.0;
-
-    config->y_range.start = y_center - y_height / 2.0;
-    config->y_range.end = y_center + y_height / 2.0;
-}
